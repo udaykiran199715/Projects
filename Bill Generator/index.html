@@ -1,0 +1,110 @@
+
+<html>
+
+<body>
+    <h1>Masai Breakfast </h1>
+    <h2>Quality is Strength</h2>
+    <hr>
+
+
+    <div>
+        <div style=" margin: 30px 100px; float: left;">
+            <table>
+                <tr class="heading">
+                    <td>ITEMS</td>
+                    <td>COST/plate</td>
+                    <td>QUANTITY</td>
+
+                </tr>
+                <tr>
+                    <td><label>IDLY</label></td>
+                    <td><input id="idlyPrice" type="text" value="20"></td>
+                    <td><input id="idlyQuantity" type="text"></td>
+                    <td><button onclick="idly()">ADD</button></td>
+
+                </tr>
+
+                <tr>
+                    <td><label>DOSA</label></td>
+                    <td><input type="text" value="30" id="dosaPrice"></td>
+                    <td><input type="text" id="dosaQuantity"></td>
+                    <td><button onclick="dosa()">ADD</button></td>
+                </tr>
+
+                <tr>
+                    <td><label>CHAPATHI</label></td>
+                    <td><input type="text" value="15" id="chapathiPrice"></td>
+                    <td><input type="text" id="chapathiQuantity"></td>
+                    <td><button onclick="chapathi()">ADD</button></td>
+                </tr>
+
+                <tr>
+                    <td><label>PURI</label></td>
+                    <td><input type="text" value="20" id="puriPrice"></td>
+                    <td><input type="text" id="puriQuantity"></td>
+                    <td><button onclick="puri()">ADD</button></td>
+                </tr>
+
+                <tr>
+                    <td><label>NOODLES</label></td>
+                    <td><input type="text" value="25" id="noodlesPrice"></td>
+                    <td><input type="text" id="noodlesQuantity"></td>
+                    <td><button onclick="noodles()">ADD</button></td>
+                </tr>
+                <tr>
+                    <td><label>PARATHA</label></td>
+                    <td><input type="text" value="25" id="parathaPrice"></td>
+                    <td><input type="text" id="parathaQuantity"></td>
+                    <td><button onclick="paratha()">ADD</button></td>
+                </tr>
+                
+            </table>
+            <div style="clear: both; margin-top: 30px;">
+                <select id="sel">
+                    <option>SELECT</option>
+                    <option id="wednesday">WEDNESDAY HUNGAMA</option>
+                    <option id="friday">FRIDAY FUN</option>
+                    <option id="sunday">SUNDAY DHAMAKA</option>
+                </select>
+                <button onclick="total()" style="padding: 15px; margin-left: 10px; font-size: 15px;">TOTAL</button>
+            </div>
+            <!-- <div style="clear: both; margin-left: 250px;"><button onclick="total()" id="total">TOTAL</button></div> -->
+        </div>
+        
+        <div style="float: left;">
+            <table id="bill">
+                    <tr>
+                        <td colspan="4" class="bill-heading">MASAI BREAKFAST</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">BILL</td>
+                    </tr>
+                     <tr class="recipt-headings">
+                         <td>Item</td>
+                         <td>QTY</td>
+                         <td>Cost/plate</td>
+                         <td>Price</td>
+                     </tr>
+                    
+
+            </table>
+         
+        </div>
+
+        
+       
+       
+        
+    </div>
+
+        
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+
+
+</body>
+
+</html>
