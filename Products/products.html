@@ -1,0 +1,342 @@
+<html>
+
+<body>
+    <div class="cont">
+        <div>
+            <form id="form">
+                <!-- <label>NAME</label> -->
+                NAME <input type="text" name="name" placeholder="Enter Name" id="name">
+                <!-- <label>URL</label> -->
+                URL <input type="url" name="image" placeholder="Enter URL" id="image">
+                <!-- <label>PRICE</label> -->
+                PRICE <input type="text" name="price" placeholder="Enter Price" id="price">
+                <input type="submit" class="submit">
+            </form>
+            <select id="filter" >
+                <option>Filter</option>
+                <option>GREATER THAN 500</option>
+                <option>GREATER THAN 1000</option>
+                <option>GREATER THAN 2000</option>
+            </select>
+            
+            <select id="sort">
+                <option>Sort</option>
+                <option>ASCENDING</option>
+                <option>DESCENDING</option>
+
+            </select>
+            <!-- <span>&#8377;</span> -->
+        </div>
+        <div >
+            <!-- <table id="tab">
+
+            </table> -->
+              <table id="res">
+
+              </table>
+        </div>
+    </div>
+
+    <style type="text/css">
+        body {
+            margin: 5% 5%;
+            background-color: #808e9b
+
+        }
+
+        .cont {
+            display: flex;
+            flex-direction: row;
+            /* flex-basis: 20% 80% */
+            /* background-color: cadetblue; */
+
+        }
+
+        .cont>div {
+            flex: 1;
+        }
+
+        form {
+            width: 200px;
+            font-size: 20px ;
+
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        input {
+            font-size: 20px;
+            padding: 5px 10px;
+            /* padding-right: 70px; */
+            margin: 10px 0px;
+        }
+
+        .img {
+            width: 200px;
+            height: 2   00px;
+            /* margin:0px 100px; */
+            /* margin-bottom: 1000px; */
+        }
+        td {
+            padding: 50px;
+            font-size: 30px;
+        }
+
+       
+        select {
+            padding: 10px;
+            font-size: 15px;
+            background-color: goldenrod;
+        }
+        #sort {
+            margin-left: 20px;
+            background-color: darksalmon;
+        }
+        .submit {
+            background-color: #6F1E51;
+            color: white;
+            padding: 8px 50px;
+        }
+        button {
+            padding: 10px 30px;
+            font-size: 20px;
+            background-color: #2c3e50;
+            color: white;
+        }
+        .rupee {
+            content: "&#8377";
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        //  var btn = document.getElementById('btn')
+        //  btn.addEventListener('click', submit)
+
+        //  function submit() {
+        //     event.preventDefault()
+        //     var res = document.querySelector('form')
+
+        //     //console.log(res)
+        //     console.log(res[0].value)
+        //  }
+
+
+        var arr = []
+        var flag = false //this is used for updating the edit data
+        var updateIndex = null
+
+        var form = document.getElementById('form')
+        form.addEventListener('submit', function () {
+            event.preventDefault()
+            if (!flag) {
+                formData(event.target, addData)  // here event.target is the form
+            } else { 
+                formData(event.target, updateData, updateIndex)
+            }
+
+        })
+
+        // in this function you take all the form details in a object
+        function formData(target, callback, arg1) {  // in place of target you have to give what ever name you want and arg1 is the updateIndex
+            var data = {}
+            Array.from(target).forEach(function (item, index) {  //in place of array form, we have to use for loop also and we add index for the sake of edit
+                if (item.name) {                  // without if condition it will works
+                    data[item.name] = item.value  // here we assign name, url and price with their respective names
+                    target[index].value = ''      //after click on the submit empty the all input boxes
+
+                }
+            })
+            //       //(or) use this
+            // for(var i =0; i<target.length; i++) {
+            //     data[target[i].name] = target[i].value
+            //     target[i].value = ''
+            // }
+            console.log(data)
+            callback(data, arg1)  //here callback is the addData function and it is also used for the updateData function with updateIndex as arg1
+        }
+
+        //in this function we push the all the data(object) in to an array
+        function addData(data) {
+            arr.push(data)
+            console.log(arr)
+            renderDom(arr) // it is the function where to add the all the details
+        }
+
+        //in this function we update the all edited data
+        function updateData(data, index) {
+            arr = arr.map(function (item, i) {
+                if (index == i) {
+                    return data
+                } else {
+                    return item
+                }
+            })
+            console.log(arr)
+            renderDom(arr) // it is the function where to add the all the details
+            flag = false // after updating we again return the false value
+        }
+
+        function renderDom(data) {     //for using of rendorDom function in different ways we pass the argument of some name like data
+
+            
+            // var tab = document.getElementById('tab')
+
+            // var row1 = document,createElement('tr')
+            // row1.innerHTML = '<tr>' + '<td>' + "Name" + '<td>' + "Image" + '<td>' + "Price" +'<td>'
+            // tab.append(row1)
+
+            var res = document.getElementById('res')
+            res.innerHTML = ''
+ 
+            
+
+            data.forEach(function (item, index) {   //here we take every element in the array and add the values in right side
+
+                
+                
+                var row2 = document.createElement('tr')
+            
+                var col2_1 = document.createElement('td')
+                var name = document.createElement('div')
+                name.innerText = item.name
+                col2_1.append(name)
+
+                var col2_2 = document.createElement('td')
+                var img = document.createElement('img')
+                img.setAttribute('src', item.image)
+                img.setAttribute('class', 'img')
+                col2_2.append(img)
+
+            //    var rupee = document.createElement('p')
+            //     rupee.value = '&#8377';
+            //    console.log(rupee)
+                var col2_3 = document.createElement('td')
+                var price = document.createElement('div')
+                price.setAttribute('class', 'rupee')
+                price.innerHTML =  '<td>' + "&#8377;" + Number(item.price)
+               // price.innerHTML = item.price
+                col2_3.append(price)
+
+                
+
+                var col2_5 = document.createElement('td')
+                var del = document.createElement('button') //here we add the delete button
+                del.textContent = "Delete"
+                del.addEventListener('click', function () {
+                    delRow(index)   // here we call the delRow function and passing index as a argument
+                })
+                col2_5.append(del)
+
+                var col2_4 = document.createElement('td')
+                var edit = document.createElement('button') //here we add the edit button
+                edit.textContent = "Edit"
+                edit.addEventListener('click', function () {
+                    editRow(index)   // here we call the editRow function and passing index as a argument
+                })
+                col2_4.append(edit)
+                //var hr = document.createElement('hr')
+
+
+                //div.append(name, img, price, edit, del)
+                row2.append(col2_1,col2_2,col2_3,col2_4,col2_5)
+                res.append(row2)
+
+
+            })
+        }
+
+        //this function is used to delete the all the elements
+        function delRow(index) {    // by using index we delete the elements
+            console.log(index)
+            arr = arr.filter(function (item, i) {    //here i is index
+                return i !== index
+            })
+            renderDom(arr)
+        }
+
+        //this function is used to edit all the elements 
+        function editRow(index) {
+            Array.from(form).forEach(function (item, i) {    //here take the input values from the form by using .children based on index
+                if (item.name) {
+                    console.log(arr[index][item.name])
+                    console.log(form.children[i])
+                    form.children[i].value = arr[index][item.name]  // here we again send the all right side data to the respective input blocks for editing by click the edit button
+                }
+            })
+
+                   // (or)
+
+            // instead of Array.from ----> we do like this also which is below
+            
+            var name =document.getElementById('name')
+            var image =document.getElementById('image')
+            var price =document.getElementById('price')
+
+            name.value = arr[index].name
+            image.value = arr[index].image
+            price.value = arr[index].price
+              
+
+           //the below two are common for the above two methods
+            flag = true
+            updateIndex = index 
+        }
+
+      var fil = document.getElementById('filter')
+      fil.addEventListener('change', filter)
+
+      function filter() {
+           var filterarr = arr.filter(function(item) {
+               if(event.target.value == 'GREATER THAN 500' ) {
+                   return Number(item.price) > 500
+               }
+               else if(event.target.value == 'GREATER THAN 1000' ) {
+                   return Number(item.price) > 1000
+               }
+               else if(event.target.value == 'GREATER THAN 2000' ) {
+                   return Number(item.price) > 2000
+               }
+           })
+           renderDom(filterarr)
+        }
+
+
+           var sorted = document.getElementById('sort')
+      sorted.addEventListener('change', sortFunc)
+
+      function sortFunc() {
+          
+            var sortarr = arr.sort(function(a,b) {
+               if(event.target.value == 'ASCENDING' ) {
+                   if (a.name > b.name) {  // sorted by name   //return a.price > b.price // sorted by price
+                          return 1
+                   }
+                    else if(a.name < b.name) {
+                       return -1
+                    }
+                   
+                 
+               }
+               else if(event.target.value == 'DESCENDING' ) {     // return a.price > b.price // sorted by price
+                if (a.name > b.name) {  // sorted by name   //return a.price > b.price // sorted by price
+                          return -1
+                   }
+                    else if(a.name < b.name) {
+                       return 1
+                    }
+               }
+              
+           })
+           renderDom(sortarr)
+      }
+
+
+
+
+    </script>
+</body>
+
+</html>
